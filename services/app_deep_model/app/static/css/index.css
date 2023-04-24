@@ -1,0 +1,327 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap");
+
+p,
+label,
+div,
+h3 {
+  font-family: Arial, sans-serif;
+}
+
+.service_menu > form > label,
+input {
+  margin-bottom: 5px;
+}
+
+.service_menu > form > label {
+  display: inline-block;
+  float: left;
+  clear: left;
+  width: 200px;
+  text-align: left;
+  padding-top: 5px;
+}
+
+form {
+  overflow: hidden;
+}
+
+.service_menu > form > input {
+  display: inline-block;
+  float: left;
+  height: 25px;
+}
+
+.service_menu > form > input[type="text"]{
+  min-width: 300px;
+  max-width: 300px;
+}
+
+.service_menu > form > select{
+  min-width: 200px;
+  max-width: 200px;
+  float: left;
+  display: block;
+}
+
+.service_menu > form > select:focus {
+  width: auto;
+}
+
+.button_wrapper > button[type="button"] {
+  float: left;
+  margin: 15px 10px 0px 0px;
+  width: 100px;
+  height: 30px;
+}
+
+input[required] {
+  background-image: radial-gradient(#f00 15%, transparent 10%),
+    radial-gradient(#f00 15%, transparent 10%);
+  background-size: 2em 2em;
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+
+h3 {
+  font-size: 20px;
+  margin: 0px 0px 15px 0px;
+}
+
+.button_wrapper {
+  clear: left;
+  float: left;
+  margin-bottom: 5px;
+}
+
+.service_block {
+  width: 600px;
+  overflow: hidden;
+  border: solid lightgrey 2px;
+  margin-bottom: 10px;
+}
+
+.service_menu {
+  clear: left;
+  width: 100%;
+  padding: 15px;
+}
+
+.service_results {
+  clear: left;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+.service_results > .task {
+  margin: 0px;
+  margin-bottom: 3px;
+  padding: 6px;
+  background-color: none;
+}
+
+.service_results > .task > div:not(.panel_content) {
+  display: inline-block;
+  margin: 0px;
+}
+
+.service_results > .task > .date {
+  width: 27%;
+  border-right: solid #b8b8b8 1.5px;
+  text-align: left;
+  margin: 0px;
+}
+
+.service_results > .task > .name {
+  width: 40%;
+  padding-left: 7px;
+  text-align: left;
+  margin: 0px;
+}
+
+.service_results > .task > .progress {
+  width: 14%;
+  border-radius: 15px 15px;
+  padding: 2px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  float: right;
+  margin: 0px;
+}
+
+.service_results > .task.active > .progress {
+  background: #ffdb78;
+  color: #c7592e;
+}
+
+.service_results > .task.done > .progress {
+  background: #a6f5c1;
+  color: #2f804a;
+}
+
+.service_results > .task.cancelled > .progress {
+  background: #f2d4c9;
+  color: #c7592e;
+  font-size: 13px;
+}
+
+.service_results > .task > .results {
+  width: 8%;
+  float: right;
+  margin: 0px;
+}
+
+.service_results > .task > .results > button {
+  height: 21px;
+  background-color: #e0e0e0;
+  border-radius: 5px 5px;
+  border: 1.5px solid #b0b0b0;
+  color: #4d4d4d;
+  float: right;
+}
+
+.service_results > .task > .results > button:active {
+  background-color: #e0e0e0;
+  color: #636363;
+  -webkit-box-shadow: inset 1px 1px 1px #808080;
+  -moz-box-shadow: inset 1px 1px 1px #808080;
+  box-shadow: inset 1px 1px 1px #808080;
+}
+
+.service_results > .task > .results > button:hover {
+  background-color: #e6e6e6;
+}
+
+.service_results > .task > .panel_content {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.panel_content p{
+  margin: 0px;
+  padding: 0px;
+  font-size: 14px;
+}
+
+.service_results > .task > .delete {
+  width: 4%;
+  float: right;
+  margin-left: 5px;
+  text-align: right;
+}
+
+.service_results > .task > .delete > button {
+  height: 21px;
+  background-color: #e0e0e0;
+  border-radius: 5px 5px;
+  border: 1.5px solid #b0b0b0;
+  color: #4d4d4d;
+  float: right;
+}
+
+.service_results > .task > .delete > button:active:enabled {
+  background-color: #e0e0e0;
+  color: #636363;
+  -webkit-box-shadow: inset 1px 1px 1px #808080;
+   -moz-box-shadow: inset 1px 1px 1px #808080;
+   box-shadow: inset 1px 1px 1px #808080;
+}
+
+.service_results > .task > .delete > button:disabled {
+  height: 21px;
+  background-color: #e6e6e6;
+  color: #a3a3a3;
+  float: right;
+  border-color: #c4c4c4;
+}
+
+.service_results > .task > .delete > button:hover:enabled {
+  background-color: #e6e6e6;
+}
+
+.service_results > .task > .panel_menu {
+  position: relative;
+  z-index: 1;
+  top: 10px;
+}
+
+.panel_menu button[class="clear_logs"]{
+  float: left;
+  margin-left: 10px;
+  border-radius: 5px 5px;
+  border: 1.5px solid #b8b8b8;
+  color: grey;
+  background-color: white;
+}
+
+.panel_menu button[class="clear_logs"]:hover{
+  background-color: #f0f0f0;
+}
+
+.panel_menu button[class="clear_logs"]:active{
+  -webkit-box-shadow: inset 1px 1px 5px #ababab;
+  -moz-box-shadow: inset 1px 1px 5px #ababab;
+  box-shadow: inset 1px 1px 5px #ababab;
+}
+
+.panel_menu label{
+  color: grey;
+  margin-top: 1px;
+  font-size: 15px;
+}
+
+.panel_menu input{
+  accent-color: lightgrey;
+}
+
+.panel_menu label, input, button{
+  float: left;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.panel_submenu {
+  display: none;
+  background-color: #f1f1f1;
+  border: 1.5px solid #b0b0b0;
+  font-size: 13px;
+  position: absolute;
+  width: 85px;
+  z-index: 1;
+  left: 0px;
+}
+
+/* Links inside the dropdown */
+.panel_submenu > a {
+  color: #4d4d4d;
+  padding: 2px 0px 2px 0px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
+
+.panel_menu > .panel_choice {
+  color: #4d4d4d;
+  text-align: left;
+  text-decoration: none;
+  background-color: #f1f1f1;
+  border: 1.5px solid #b0b0b0;
+  display: block;
+  font-size: 13px;
+  width: 80px;
+  height: 16px;
+  padding-top: 2px;
+  padding-left: 5px;
+  margin-right: 10px;
+  float: left;
+}
+
+.panel_choice span[class="symbol"]{
+  color: #9c9c9c;
+  font-size: 12px;
+  padding-right: 5px;
+  float: right;
+}
+
+.panel_choice:hover .panel_submenu{
+  color: red;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.panel_submenu > a:hover {
+  background-color: #ddd;
+}
+
+.panel_submenu > a:active {
+  background-color: #bababa;
+}
+
+/* Show the dropdown menu on hover */
+.results:hover .panel_submenu {
+  display: block;
+}
+
+.results_menu_content{
+  float: left;
+}

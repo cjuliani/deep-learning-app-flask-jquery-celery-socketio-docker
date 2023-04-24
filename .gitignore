@@ -1,0 +1,12 @@
+.idea
+.ssh
+.git
+.DS_Store
+*__pycache__
+services/app_deep_model/app/data/processed/*
+services/app_deep_model/app/data/test/*
+services/app_deep_model/app/data/train/*
+services/app_deep_model/app/data/validation/*
+services/app_deep_model/app/results/summary/*
+services/app_deep_model/app/results/weights/*
+tmp.py

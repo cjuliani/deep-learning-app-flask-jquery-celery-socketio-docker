@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script type="text/javascript" src="{{ url_for('static', filename='script/index.js') }}"></script>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block body %}
+<h1>Deep model services</h1>
+
+<!-- train block -->
+<div class="service_block train">
+  <div class="service_menu train">
+    <h3>Train</h3>
+    <form action="" method="POST">
+      <label for="text">Model name</label>
+      <input type="text" placeholder="null" name="model_name" value="">
+
+      <label for="text">Model to restore</label>
+      <select name="model_to_restore" class="models">
+        <option value="None">None</option>
+      </select>
+
+      <label for="shortcode">Epochs</label>
+      <input type="number" placeholder=500 min=1 name="epochs" required value=500>
+
+      <label for="shortcode">Epoch interval saving</label>
+      <input type="number" placeholder=10 min=1 name="epoch_interval_saving" required value=10>
+
+      <label for="shortcode">Batch size</label>
+      <input type="number" placeholder=32 min=1 name="batch_size" required value=32>
+
+      <label for="shortcode">Learning rate</label>
+      <input type="number" placeholder=0.0001 name="learning_rate" required value=0.0001>
+
+      <label for="shortcode">Input size</label>
+      <input type="number" placeholder=128 min=32 name="input_size" required value=128>
+
+      <label for="shortcode">Metric interval</label>
+      <input type="number" placeholder=1 min=1 name="metric_interval" required value=1>
+
+      <label for="shortcode">Validation step</label>
+      <input type="number" placeholder=5 min=1 name="valid_step" required value=5>
+
+      <label for="shortcode">Model inner weight</label>
+      <input type="number" placeholder=0.0001 name="inner_weight" required value=0.0001>
+
+      <label for="shortcode">Balance train data via resampling</label>
+      <input type="checkbox" value="off" name="balance_train_samples_by_resampling">
+
+      <label for="checkbox">Load generator data</label>
+      <input type="checkbox" value="off" name="load_data_generator">
+
+      <label for="checkbox">Apply augmentation</label>
+      <input type="checkbox" value="off" name="augmentation">
+
+      <label for="shortcode">Task name</label>
+      <input type="text" placeholder="null" name="task_name" value="">
+
+      <div class="button_wrapper">
+        <button type="button" name="submit_button" class="run" value="train">Run</button>
+        <button type="button" name="submit_button" class="cancel" value="cancel_train">Cancel</button>
+      </div>
+    </form>
+  </div>
+  <div class="service_results train"></div>
+</div>
+
+<!-- test block -->
+<div class="service_block test">
+  <div class="service_menu test">
+    <h3>Test</h3>
+    <form action="" method="POST">
+      <label for="text">Model to restore</label>
+      <select name="model_to_restore" class="models">
+        <option value="None">None</option>
+      </select>
+      <label for="shortcode">Task name</label>
+      <input type="text" placeholder="null" name="task_name" value="">
+      <div class="button_wrapper">
+        <button type="button" name="submit_button" class="run" value="test">Run</button>
+        <button type="button" name="submit_button" class="cancel" value="cancel_test">Cancel</button>
+      </div>
+    </form>
+  </div>
+  <div class="service_results test"></div>
+</div>
+
+
+<script type="text/javascript">
+  // ---------------------- LEAVING PAGE: ASK CONFIRMATION & KILL TASKS
+  $(window).on('beforeunload', function(){
+    return confirm("Do you really want to close?");
+  });
+
+  $(window).on('unload', function(){
+    $.ajax({
+          url: "http://127.0.0.1:5051/kill_tasks",
+          method: "GET",
+          async: false,
+          error: function(request, status, error){
+            alert('Error: '+error);
+          }
+        });
+  });
+
+  $(document).ready( function() {
+      // ---------------------- WEBSOCKET: CONNECTION
+      // Client side: connect to the Socket.IO server (using the IP of the server).
+      var socket = io.connect('http://127.0.0.1:5051');
+
+      socket.on('connect_failed', function (data) {
+          alert('connect failed!');
+      });
+
+      // ---------------------- TASK: ADD LOGS TO PANEL CONTENT & SCROLL DOWN
+      socket.on('service_log', function(msg) {
+          // Add logs.
+          $('.service_results.'+msg.service).find('.task.active').find('.panel_content .results_to_display').append('<p>'+msg.data+'</p>').html();
+
+          // Apply autoscroll given input state
+          var item = $('.service_results.'+msg.service).find('.task.active').find('.panel_content');
+          var scroll = $('.service_results.'+msg.service).find('.task.active').find('input[name="autoscroll"]');
+
+          if (scroll.is(":checked")){
+            // Scroll down while displaying logs
+            item.animate({scrollTop: item.find('p:last-child').offset().top + 'px'},
+              {speed:1000, complete:function(){
+              item.stop();
+            }});
+          } else {
+            item.stop()
+          };
+      });
+
+      // ---------------------- TASK: CHANGE STATUS & TOGGLE BUTTONS WHEN FINISHED
+      socket.on('task_status', function(msg) {
+          // Define variable
+          var thisServiceBlock = $('#'+msg.task_id).closest('.service_block');
+
+          if (msg.status == 'completed'){
+            // Toggle run and delete buttons
+            thisServiceBlock.find('button[class="run"]').removeAttr('disabled');
+            $('#'+msg.task_id).find('button[class="delete_button"]').removeAttr('disabled');
+
+            // Change task status
+            var currentTaskStatus = $('#'+msg.task_id).attr('class').split(' ')[1];
+            if(currentTaskStatus == "active"){
+              $('#'+msg.task_id).removeClass('active').addClass('done');
+              $('#'+msg.task_id).find('.progress').text('DONE');
+            }
+          };
+      });
+
+      });
+  </script>
+
+{% endblock %}
