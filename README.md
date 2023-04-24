@@ -46,4 +46,4 @@ Then, open `http://127.0.0.1:5051/` in your web-browser. Docker Desktop must be 
 
 Simple architecture:
 
-![Containers](./figures/docker-containers.png)
+![Containers](./figures/docker-containers2.png)
