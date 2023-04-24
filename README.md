@@ -1,4 +1,4 @@
-# Deploy deep learning model with Flask, Celery, SocketIO and Docker
+# Deploy deep learning model with Flask, jQuery, Celery, SocketIO and Docker
 
 Simple web application designed with to setup the server, client sides and the communication inbetween. 
 The template is a good starting base for building an application asynchronous processing of long tasks,
