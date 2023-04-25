@@ -6,7 +6,6 @@ services:
     hostname: deep_model
     environment:
       - DEEP_MODEL_APP=http://127.0.0.1:5051
-      - MYSQL_APP=http://mysql_handler:5050
       - REDIS_HOST=redis-server
       - HOST_DB=mysql
     ports:

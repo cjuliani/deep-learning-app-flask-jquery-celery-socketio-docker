@@ -17,7 +17,6 @@ from utils.utils import cancel_active_task_from_service, convert_boolean
 
 # Define urls to resources.
 DEEP_MODEL_URL = os.environ.get("DEEP_MODEL_APP", "http://127.0.0.1:5051")
-MYSQL_URL = os.environ.get("MYSQL_APP", "http://127.0.0.1:5050")
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
