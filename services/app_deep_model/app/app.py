@@ -11,7 +11,6 @@ from flask_cors import CORS
 from flask_socketio import SocketIO
 from utils.app_celery import create_apps
 from utils.database import get_database
-from utils.queries import create_tables, create_connection
 from utils.utils import get_class_instance_copy, get_weight_folder, process_thread
 from utils.utils import cancel_active_task_from_service, convert_boolean
 
@@ -269,20 +268,8 @@ class DeepModelTest(Resource):
         return Response({}, 200, mimetype='application/json')
 
 
-def createdb():
-    # Get MySQK connection.
-    connection = create_connection(None, config.HOST, config.USER, config.PASSWORD, config.PORT, show_info=False)
-    # Create database.
-    connection.cursor().execute(f'CREATE DATABASE IF NOT EXISTS {config.DB_NAME}')
-    # Create table to save user inputs.
-    tmp = create_connection(config.DB_NAME, config.HOST, config.USER, config.PASSWORD, config.PORT, show_info=False)
-    create_tables(tmp)
-
-
 api.add_resource(DeepModelTrain, '/train')
 api.add_resource(DeepModelTest, '/test')
 
 if __name__ == '__main__':
-    # Create the database and run the app.
-    createdb()
     socketio.run(app, port=5051, host='0.0.0.0')

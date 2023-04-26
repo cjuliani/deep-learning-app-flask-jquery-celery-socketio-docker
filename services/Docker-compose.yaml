@@ -5,7 +5,7 @@ services:
     build: ./app_deep_model
     hostname: deep_model
     environment:
-      - DEEP_MODEL_APP=http://127.0.0.1:5051
+      - DEEP_MODEL_APP=http://deep_model:5051
       - REDIS_HOST=redis-server
       - HOST_DB=mysql
     ports:
@@ -22,9 +22,9 @@ services:
       - MYSQL_DATABASE=${DB}
       - MYSQL_USER=${USER}
       - MYSQL_PASSWORD=${PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
+      - ./dumps/init.sql:/docker-entrypoint-initdb.d/1-schema.sql
     networks:
       - app-network
 

@@ -1,5 +1,5 @@
 import config
-from .queries import execute_query, create_connection, create_tables
+from .queries import execute_query, create_connection
 
 
 class MainDatabase:
@@ -20,9 +20,6 @@ class MainDatabase:
         # Connect or create database.
         self.connection = create_connection(
             db_name, host, user, password, port, show_info=show_info)
-
-        # Create tables
-        create_tables(self.connection)
 
     def insert_train_config(self, values):
         query = """

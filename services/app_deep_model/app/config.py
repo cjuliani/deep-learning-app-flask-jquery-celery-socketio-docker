@@ -1,7 +1,7 @@
 import os
 
 # MySQL credentials.
-USER = 'root'
+USER = 'batman'
 PASSWORD = '!abcd1234567'
 HOST = os.environ.get("HOST_DB", "localhost")
 PORT = 3306
