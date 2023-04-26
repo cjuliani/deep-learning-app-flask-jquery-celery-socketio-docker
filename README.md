@@ -38,12 +38,12 @@ to initiating a service from the learning model.
 
 ## Usage
 
+Architecture considered:
+
+![Containers](./figures/docker-containers.png)
+
 Run with Docker compose:
 ```
 $ docker-compose up --build
 ```
 Then, open `http://127.0.0.1:5051/` in your web-browser. Docker Desktop must be running.
-
-Simple architecture:
-
-![Containers](./figures/docker-containers.png)
