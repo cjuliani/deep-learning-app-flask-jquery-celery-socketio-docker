@@ -4,12 +4,13 @@ services:
   deep_model:
     build: ./app_deep_model
     hostname: deep_model
+    restart: always
     environment:
       - DEEP_MODEL_APP=http://deep_model:5051
       - REDIS_HOST=redis-server
       - HOST_DB=mysql
     ports:
-      - 5051:5051  # host:container
+      - 5051:5051
     depends_on:
       - mysql
       - redis-server
@@ -19,12 +20,15 @@ services:
   mysql:
     image: mysql:5.6
     environment:
+      - MYSQL_ROOT_PASSWORD=${PASSWORD}
       - MYSQL_DATABASE=${DB}
       - MYSQL_USER=${USER}
       - MYSQL_PASSWORD=${PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
       - ./dumps/init.sql:/docker-entrypoint-initdb.d/1-schema.sql
+    expose:
+      - 3306
     networks:
       - app-network
 

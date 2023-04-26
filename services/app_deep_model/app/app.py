@@ -5,7 +5,7 @@ import requests
 import datetime
 
 from modules.deep_model import DeepModel
-from flask import request, Response, render_template
+from flask import request, render_template
 from flask_restful import Resource, Api
 from flask_cors import CORS
 from flask_socketio import SocketIO
@@ -161,7 +161,7 @@ class DeepModelTrain(Resource):
             endpoint_status=DEEP_MODEL_URL + '/task_status',
             endpoint_broadcast=DEEP_MODEL_URL + '/broadcast')
 
-        return Response({}, 200, mimetype='application/json')
+        return {}, 200, {'ContentType': 'application/json'}
 
     def post(self):
         json_data = request.get_json(force=True)
@@ -192,7 +192,7 @@ class DeepModelTrain(Resource):
                       solver_args),
                 task_id=json_data['task_id'])
 
-        return Response({}, 200, mimetype='application/json')
+        return {}, 200, {'ContentType': 'application/json'}
 
 
 class DeepModelTest(Resource):
@@ -248,7 +248,7 @@ class DeepModelTest(Resource):
             endpoint_status=DEEP_MODEL_URL + '/task_status',
             endpoint_broadcast=DEEP_MODEL_URL + '/broadcast')
 
-        return Response({}, 200, mimetype='application/json')
+        return {}, 200, {'ContentType': 'application/json'}
 
     def post(self):
         json_data = request.get_json(force=True)
@@ -265,7 +265,7 @@ class DeepModelTest(Resource):
                 args=(json_data['model_to_restore'], solver_args),
                 task_id=json_data['task_id'])
 
-        return Response({}, 200, mimetype='application/json')
+        return {}, 200, {'ContentType': 'application/json'}
 
 
 api.add_resource(DeepModelTrain, '/train')
