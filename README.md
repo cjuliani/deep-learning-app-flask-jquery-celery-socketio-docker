@@ -1,9 +1,9 @@
 # Deploy deep learning model with Flask, jQuery, Celery, SocketIO and Docker
 
-Simple web application designed with to setup the server, client sides and the communication inbetween. 
-The template is a good starting base for building an application asynchronous processing of long tasks,
-with continuous streaming of information from the long-running processes to client side. The client-server
-communication is handled via websockets and (custom) event-driven backend message handlers operating
+Simple web application with deep learning services (_Train_ and _Test_). The template is a good starting 
+base for building an application with asynchronous processing of long tasks,
+and continuous streaming of information from the long-running processes to client side. The server/client
+communication is handled via a websocket and (custom) event-driven backend message handlers operating
 with threading and queue objects.
 
 * **Server:** Flask, Flask-SocketIO, Celery
@@ -20,8 +20,11 @@ Deep learning model architecture (implemented with TensorFlow)
 
 ![Model architecture](./figures/model-architecture.PNG)
 
-Weights and training summaries are saved locally in folders. Previous model variables can be loaded prior
-to initiating a service from the learning model.
+Weights and training summaries are saved locally. Previous model variables can be loaded prior
+to initiating a service from the learning model. The module processes 1 task at a time per services, 
+e.g. the _run_ button of service _Test_ becomes unavailable after pushing it as long as the task is not
+terminated. Multiple services (with their respective task) can operate in parallel depending on the 
+server resource. Note that if the page if reloaded or closed, all active tasks are cancelled.
 
 ## Included
 
